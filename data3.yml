@@ -1,19 +1,20 @@
 version: '3'
 services:
-  master:
+  data3:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
     volumes:
       - ./ik-6.3.0:/usr/share/elasticsearch/plugins/ik
     environment:
       - cluster.name=lxc_es
-      - node.name=master_node
-      - node.master=true
-      - node.data=false
+      - node.name=data_node3
+      - node.master=false
+      - node.data=true
       - node.ingest=false
-      - transport.tcp.port=9301
-      - http.port=9201
+      - transport.tcp.port=9304
+      - http.port=9204
       - ES_JAVA_OPTS=-Xms128m -Xmx128m
+      - "discovery.zen.ping.unicast.hosts=${ip}:9303"
     ports:
-      - 9201:9201
-      - 9301:9301
+      - 9205:9205
+      - 9305:9305
     restart: always

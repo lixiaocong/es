@@ -14,5 +14,7 @@ services:
       - http.port=9202
       - ES_JAVA_OPTS=-Xms128m -Xmx128m
       - "discovery.zen.ping.unicast.hosts=${ip}:9301"
-    network_mode: "host"
+    ports:
+      - 9202:9202
+      - 9302:9302
     restart: always
